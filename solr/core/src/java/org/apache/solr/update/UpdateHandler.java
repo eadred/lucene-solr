@@ -113,7 +113,7 @@ public abstract class UpdateHandler implements SolrInfoMBean {
         dataDir = core.getDataDir();
       }
 
-      if (dataDir != null && dataDir.startsWith("hdfs:/")) {
+      if (dataDir != null && (dataDir.startsWith("hdfs:/") || dataDir.startsWith("wasb:/"))) {
         DirectoryFactory dirFactory = core.getDirectoryFactory();
         if (dirFactory instanceof HdfsDirectoryFactory) {
           ulog = new HdfsUpdateLog(((HdfsDirectoryFactory)dirFactory).getConfDir());
